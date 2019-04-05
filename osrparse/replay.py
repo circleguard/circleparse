@@ -3,6 +3,8 @@ import lzma, struct, datetime
 
 # the first build with rng seed value added as the last frame in the lzma data.
 VERSION_THRESHOLD = 20130319
+LZMA_SIZE_LIMIT = 5e6
+LZMA_CHUNK_SIZE = 1e4
 
 class ReplayEvent(object):
     def __init__(self, time_since_previous_action, x, y, keys_pressed):
@@ -151,7 +153,19 @@ class Replay(object):
                 del self.play_data[-1]
 
     def data_from_lmza(self, lzma_string):
-        datastring = lzma.decompress(lzma_string, format=lzma.FORMAT_AUTO).decode('ascii')[:-1]
+        datastring = ""
+        decompressor = lzma.LZMADecompressor(memlimit=4 * LZMA_SIZE_LIMIT)
+        size = 0
+
+        decompressor.decompress(lzma_string, 0)
+
+        while size <= LZMA_SIZE_LIMIT and not decompressor.eof:
+            datastring += decompressor.decompress(b'', LZMA_CHUNK_SIZE).decode('ascii')
+            size += LZMA_CHUNK_SIZE
+
+        if size > LZMA_SIZE_LIMIT:
+            raise ValueError("The LZMA to be decompressed is longer than the configured limit.")
+
         events = [eventstring.split('|') for eventstring in datastring.split(',')]
         self.play_data = [ReplayEvent(int(event[0]), float(event[1]), float(event[2]), int(event[3])) for event in events]
 
