@@ -1,6 +1,11 @@
 
 [![PyPi version](https://badge.fury.io/py/circleparse.svg)](https://pypi.org/project/circleparse/)
 
+
+# Archival 01/26/2021
+
+### Now that [osrparse](https://github.com/kszlim/osu-replay-parser/), this fork's upstream repo, is being actively updated and maintained, this repo should no longer be used. Currently osrparse has feature parity with this fork thanks to [kszlim/osu-replay-parser#25](https://github.com/kszlim/osu-replay-parser/pull/25), but that will no doubt change in the future to make osrparse the better choice.
+
 # circleparse, a .osr and lzma parser
 
 This fork is designed specifically for [Circlecore](https://github.com/circleguard/circlecore), and extends the functionality of the upstream repo by allowing parsing of a pure lzma bytestring, instead of the bytestring contents of an entire .osr file. Usage:
