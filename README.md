@@ -4,7 +4,7 @@
 
 # Archival 01/26/2021
 
-### Now that [osrparse](https://github.com/kszlim/osu-replay-parser/), this fork's upstream repo, is being actively updated and maintained, this repo should no longer be used. Currently osrparse has feature parity with this fork thanks to [kszlim/osu-replay-parser#25](https://github.com/kszlim/osu-replay-parser/pull/25), but that will no doubt change in the future to make osrparse the better choice.
+### Now that [osrparse](https://github.com/kszlim/osu-replay-parser/), this fork's upstream repo, is being actively updated and maintained, this repo should no longer be used and will no longer be updated.
 
 # circleparse, a .osr and lzma parser
 
